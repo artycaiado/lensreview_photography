@@ -1,0 +1,2 @@
+{{ object.title}}
+{{ object.get_lens_brand_display }}

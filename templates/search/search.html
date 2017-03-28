@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if not query %}
+
+<div class="container lrp_homepage_search_section centered">
+
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-center search_col_10">
+            <h1><i class="fa fa-camera"></i> Camera Lens Reviews</h1>
+            <p style="text-align:left">Search for your camera to find compatible lenses for it, or search for a specific lens you're looking for reviews on.</p>
+
+              <form class="form-inline autocomplete-me" action="." method="get" role="search">
+                <div class="form-group lrp_homepage_search_form" style="margin-left: auto; margin-right: auto;">
+                  <div class="input-group main-search-group">
+                    <input type="search" class="form-control main-search" autocomplete="off" placeholder="Search" id="id_q" name="q"></input>
+                  </div>
+                  <button type="submit" class="btn main-search-button"><i class="fa fa-search"></i></button>
+                </div>
+
+                {%comment%}
+                <!-- selection boxes if wanted, need to automatically check if the query run had it selected -->
+                <label for="id_models_0">Search:</label>
+                <label class="checkbox-inline" for="id_models_0"><input id="id_models_0" name="models" type="checkbox" value="camera.camera" /> Cameras</label>
+                <label class="checkbox-inline" for="id_models_1"><input id="id_models_1" name="models" type="checkbox" value="camera_lens.cameralens" /> Lenses</label>
+                {%endcomment%}
+
+              </form>
+              <h3>Or Browse</h3>
+              <a href="/lenses/?/">Lenses</a> | <a href="/cameras/?/">Cameras</a>
+
+          </div>
+
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 search_col_1"></div>
+
+</div>
+
+{%endif %}
+
+{% if query %}
+<form method="get" action=".">
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <input type="submit" value="Search">
+      </td>
+    </tr>
+  </table>
+</form>
+
+<div class="container search_results">
+  <div class="row" style="vertical-align: middle;">
+      <table class="table table-striped table-condensed">
+          <thead class="search_results_table_head">
+              <tr>
+                  <th>Search results for <strong>{{query}}</strong></th>
+                  <th>Photos</th>
+              </tr>
+          </thead>
+          <tbody>
+
+            {% for result in page.object_list %}
+            <tr>
+                <td style="vertical-align: middle">
+                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                </td>
+                <td>
+                    {% if result.object.product_thumb_sm and not result.object.product_thumb_sm = "Unavailable" %}
+                    <a href="{{ result.object.get_absolute_url }}">
+                      <img src="{{result.object.product_thumb_sm }}" class="search_result_image">
+                    </a>
+                    {% else %}
+                        No Image Available
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+          </tbody>
+      </table>
+
+      {% if page.has_previous or page.has_next %}
+      <div style="margin:5px;">
+        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+        |
+        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+      </div>
+      {% endif %}
+
+  </div>
+</div>
+
+{%comment%}{% include "_pagination.html" %}{%endcomment%}
+
+{% else %}
+    {# Show some example queries to run, maybe query syntax, something else? #}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/favicon.ico">
+
+  <title>{% block title %}Camera Lens Reviews - LensReview.Photography{% endblock title %}</title>
+
+  <link rel="stylesheet" href="{{STATIC_URL }}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{STATIC_URL }}css/bootstrap-theme.min.css">
+  {%comment%}
+  <!--<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+  {%endcomment%}
+  <link href="{{STATIC_URL}}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ STATIC_URL }}css/lrp.css" rel="stylesheet" type="text/css">
+
+  {% block extrahead %} {% endblock extrahead %}
+
+</head>
+
+<body role="document">
+
+  {% include "_navigation.html" %}
+
+  <div class="container lrp_leader_container">
+    <div class="row">
+      {% include "google_adsense/_lrp_leader_wide.html" %}
+      {% include "google_adsense/_lrp_leader_mobile.html" %}
+    </div>
+  </div> <!-- /container -->
+
+  <div class="container">
+    <div class="row content_main_row">
+      {% block content%} {% endblock %}
+      {% block main %} {% endblock %}
+    </div>
+  </div> <!-- /container -->
+
+  <div class="container">
+    <div class="row">
+      {% include "_footer.html" %}
+    </div>
+  </div> <!-- /container -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  {% include "_autocomplete_js.html" %}
+  {% include "amazon_associates/_quick_linker.html" %}
+
+</body>
+</html>

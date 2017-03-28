@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} {{object}} Digital SLR Cameras - LensReview.Photography {% endblock title %}
+
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+
+  <form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Submit" />
+  </form>
+
+  {% if cameras %}
+
+    {% comment %}
+      <!-- this is the whats returned without pagination, with pagination its page objects so need to call object_list -->
+      {% for camera in cameras %}
+    {%endcomment%}
+
+    {% for camera in cameras.object_list %}
+      {{ camera.title }} <br>
+    {% endfor%}
+
+    <div id="pagination">
+      {{ cameras.render }}
+    </div>
+
+  {% endif%}
+
+{% endblock %}

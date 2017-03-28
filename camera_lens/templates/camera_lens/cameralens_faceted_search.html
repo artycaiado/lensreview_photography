@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} SLR Camera Lenses - LensReview.Photography {% endblock title %}
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+
+
+<div class="row" style="text-align:center;">
+  <h1>Browse Camera Lenses</h1>
+  <h2>Narrow down results by brand, aperture, focal length.</h2>
+  <center>
+    <form method="get" action="./">
+      <table>
+        {{ form.as_table }}
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <input type="submit" value="Search">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </center>
+
+</div>
+
+<div class="row" style="vertical-align: middle;">
+
+  <div class="col-md-2">
+    <!-- Begin faceting. -->
+    <div>
+      <dl>
+        {% if facets.fields.lens_brand %}
+        <dt>Brands</dt>
+        {% for brand in facets.fields.lens_brand%}
+        <dd>
+          {% if 'selected_facets=lens_brand_exact:'|add:brand.0 in request.get_full_path %}
+
+          {%comment %}
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          {%endcomment%}
+          <strong>Showing:</strong> {{ brand.0 }} ({{ brand.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=lens_brand_exact:'|cut:brand.0 }}">remove filter</a>
+          {% else %}
+
+                {% with page_to_str=page.number|stringformat:"i"%}
+                    {% with page_path='&page='|add:page_to_str %}
+                      <a href="{{ request.get_full_path|cut:page_path }}&amp;selected_facets=lens_brand_exact:{{ brand.0}}">{{ brand.0 }}</a> ({{ brand.1 }})
+                    {% endwith %}
+                {% endwith %}
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+
+        {% else %}
+
+        <p>No brand facets.</p>
+
+        {% endif %}
+      </dl>
+    </div>
+{%comment%}
+
+    <div>
+      <dl>
+        {% if facets.fields.aperture_wide_max %}
+        <dt>Max Aperture</dt>
+        {% for aperture_wide_max in facets.fields.aperture_wide_max %}
+        <dd>
+
+          {% if 'selected_facets=aperture_wide_max_exact:' in request.get_full_path %}
+
+          <strong>Showing: </strong>{{ aperture_wide_max.0 }} ({{aperture_wide_max.1}}) <br>
+
+          {% with float_to_string=aperture_wide_max.0 %}
+          {% with myFilter='&selected_facets=aperture_wide_max_exact:' %}
+          {% with clip_string=myFilter|add:float_to_string %}
+          <a href="{{request.get_full_path|cut:clip_string}}">remove filter</a>
+          {% endwith%}
+          {% endwith%}
+          {%endwith%}
+
+
+          {% else %}
+          <a href="{{ request.get_full_path }}&amp;selected_facets=aperture_wide_max_exact:{{ aperture_wide_max.0|stringformat:".10f" }}">{{ aperture_wide_max.0|floatformat }}</a> ({{ aperture_wide_max.1 }})
+          {% endif %}
+        </dd>
+
+        {% endfor %}
+        {% else %}
+
+          <p>No megapixel facets.</p>
+
+        {% endif %}
+      </dl>
+    </div>
+{% endcomment%}
+
+{%comment%}
+
+    <div>
+      <dl>
+        {% if facets.fields.lens_sensor %}
+        <dt>sensors</dt>
+        {% for sensor in facets.fields.lens_sensor%}
+        <dd>
+          {% if 'selected_facets=lens_sensor_exact:'|add:sensor.0 in request.get_full_path %}
+
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          <strong>Showing:</strong> {{ sensor.0 }} ({{ sensor.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=lens_sensor_exact:'|cut:sensor.0 }}">remove filter</a>
+          {% else %}
+
+          <a href="{{ request.get_full_path }}&amp;selected_facets=lens_sensor_exact:{{ sensor.0}}">{{ sensor.0 }}</a> ({{ sensor.1 }})
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+        {% else %}
+        <p>No sensor facets.</p>
+        {% endif %}
+      </dl>
+    </div>
+
+{% endcomment%}
+
+
+{% comment %}
+
+    <div>
+      <dl>
+        {% if facets.fields.focus_motor %}
+        <dt>focus_motors</dt>
+        {% for focus_motor in facets.fields.focus_motor%}
+        <dd>
+          {% if 'selected_facets=focus_motor_exact:'|add:focus_motor.0 in request.get_full_path %}
+
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          <strong>Showing:</strong> {{ focus_motor.0 }} ({{ focus_motor.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=focus_motor_exact:'|cut:focus_motor.0 }}">remove filter</a>
+          {% else %}
+
+          <a href="{{ request.get_full_path }}&amp;selected_facets=focus_motor_exact:{{ focus_motor.0}}">{{ focus_motor.0 }}</a> ({{ focus_motor.1 }})
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+        {% else %}
+        <p>No focus_motor facets.</p>
+        {% endif %}
+      </dl>
+    </div>
+
+{% endcomment%}
+{% comment %}
+
+    <div>
+      <dl>
+        {% if facets.fields.focus_technology %}
+        <dt>focus_technologys</dt>
+        {% for focus_technology in facets.fields.focus_technology%}
+        <dd>
+          {% if 'selected_facets=focus_technology_exact:'|add:focus_technology.0 in request.get_full_path %}
+
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          <strong>Showing:</strong> {{ focus_technology.0 }} ({{ focus_technology.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=focus_technology_exact:'|cut:focus_technology.0 }}">remove filter</a>
+          {% else %}
+
+          <a href="{{ request.get_full_path }}&amp;selected_facets=focus_technology_exact:{{ focus_technology.0}}">{{ focus_technology.0 }}</a> ({{ focus_technology.1 }})
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+        {% else %}
+        <p>No focus_technology facets.</p>
+        {% endif %}
+      </dl>
+    </div>
+
+{% endcomment %}
+
+{% comment %}
+
+    <div>
+      <dl>
+        {% if facets.fields.focal_length_max %}
+        <dt>focal_length_maxs</dt>
+        {% for focal_length_max in facets.fields.focal_length_max%}
+        <dd>
+          {% if 'selected_facets=focal_length_max_exact:'|add:focal_length_max.0 in request.get_full_path %}
+
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          <strong>Showing:</strong> {{ focal_length_max.0 }} ({{ focal_length_max.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=focal_length_max_exact:'|cut:focal_length_max.0 }}">remove filter</a>
+          {% else %}
+
+          <a href="{{ request.get_full_path }}&amp;selected_facets=focal_length_max_exact:{{ focal_length_max.0}}">{{ focal_length_max.0 }}</a> ({{ focal_length_max.1 }})
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+        {% else %}
+        <p>No focal_length_max facets.</p>
+        {% endif %}
+      </dl>
+    </div>
+
+{% endcomment%}
+
+{% comment %}
+    <div>
+      <dl>
+        {% if facets.fields.focal_length_min %}
+        <dt>focal_length_mins</dt>
+        {% for focal_length_min in facets.fields.focal_length_min%}
+        <dd>
+          {% if 'selected_facets=focal_length_min_exact:'|add:focal_length_min.0 in request.get_full_path %}
+
+          <!-- LOOK INTO ESCAPING QUOTES AND JOINING THIS WHOLE STRING... GOT ONE BELOW WORKING...-->
+          <strong>Showing:</strong> {{ focal_length_min.0 }} ({{ focal_length_min.1 }}) <a href="{{ request.get_full_path|cut:'&selected_facets=focal_length_min_exact:'|cut:focal_length_min.0 }}">remove filter</a>
+          {% else %}
+
+          <a href="{{ request.get_full_path }}&amp;selected_facets=focal_length_min_exact:{{ focal_length_min.0}}">{{ focal_length_min.0 }}</a> ({{ focal_length_min.1 }})
+
+          {% endif%}
+        </dd>
+        {% endfor %}
+        {% else %}
+        <p>No focal_length_min facets.</p>
+        {% endif %}
+      </dl>
+    </div>
+
+{% endcomment%}
+
+    <!-- End faceting -->
+  </div>
+
+  <div class="col-md-10">
+    <table class="table table-striped table-condensed">
+      <thead class="search_results_table_head">
+        <tr>
+          <th>Camera Lens</th>
+          <th>Max Aperture</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for result in page.object_list %}
+        <tr>
+          <td style="vertical-align: middle">
+            <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+          </td>
+
+          <td>
+            {% if result.object.aperture_wide_max and not result.object.aperture_wide_max = "Unavailable" %}
+            {{result.object.aperture_wide_max }}
+            {% else %}
+            Not available
+            {% endif %}
+          </td>
+
+          <td>
+            {% if result.object.product_thumb_sm_url and not result.object.product_thumb_sm_url = "Unavailable" %}
+            <a href="{{ result.object.get_absolute_url }}">
+              <img src="{{result.object.product_thumb_sm_url }}" class="search_result_image">
+            </a>
+            {% else %}
+            No Image Available
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td style="vertical-align:middle">
+            No results found{% if query %} for <strong>{{query}}</strong>{%endif%}.
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if page.has_previous or page.has_next %}
+        {% if 'page='|add:page.number in request.get_full_path %}
+            {% with page_to_str=page.number|stringformat:"i"%}
+                {% with page_path='&page='|add:page_to_str %}
+                <div style="margin:5px;">
+                    {% if page.has_previous %}<a href="{{ request.get_full_path|cut:page_path }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="{{ request.get_full_path|cut:page_path }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+                {% endwith%}
+            {% endwith %}
+        {% else %}
+        <div style="margin:5px;">
+            {% if page.has_previous %}<a href="{{ request.get_full_path }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+            |
+            {% if page.has_next %}<a href="{{ request.get_full_path }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+        </div>
+        {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+
+{% endblock content %}

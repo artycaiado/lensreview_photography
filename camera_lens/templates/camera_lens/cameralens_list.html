@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="col-md-8 listview">
+
+    <h1><i class="fa fa-camera"></i> Camera Lenses</h1>
+    <ul>
+    {% for camlens in object_list %}
+        <li><a href ="/lenses/{{camlens.slug}}/">{{ camlens.title }}</a></li>
+
+    {% empty %}
+        <li>No lenses yet folks!</li>
+    {% endfor %}
+    </ul>
+
+    <div class="google_ads_md_8_banner">
+      {% include "google_adsense/_lrp_col_md_8_banner.html" %}
+    </div>
+
+    {% include "_pagination.html" %}
+  </div>
+
+  <div class="col-md-4 listview_right_column text-center">
+    {% include "google_adsense/_lrp_listview_right_column.html" %}
+    {% include "amazon_associates/_generic_banner_camera_300_x_600.html" %}
+  </div>
+
+{% comment %}
+{% if is_paginated %}
+
+<div class="pagination">
+  <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="/lenses/?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="page-current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="/lenses/?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+{% endcomment %}
+
+
+{% endblock %}

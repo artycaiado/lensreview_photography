@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Create review" %}{% endblock %}
+
+{% block extrahead %}
+<link href="{{ STATIC_URL }}css/starrate.css" rel="stylesheet" type="text/css">
+{% endblock extrahead %}
+
+{% block main %}
+<h1>{% trans "Create review" %}</h1>
+
+{% if object.reviewed_item %}
+  {{object.reviewed_item}}
+{% endif %}
+
+{% if object.content_type %}
+{{object.content_type}}
+{% endif %}
+
+{% if object.object_id %}
+  {{ object.object_id}}
+{% endif %}
+
+<!-- THIS IS starrate.css -->
+
+<form method="post" action=".">
+  {% csrf_token %}
+  <div class="row">
+    <li>
+      <label for="id_content" style="vertical-align:top; color:white;">Content:</label>
+      <textarea cols="40" id="id_content" maxlength="1024" name="content" rows="10"></textarea>
+    </li>
+
+  <fieldset class="rating">
+      <legend>Overall Rating:</legend>
+      <input type="radio" id="star5" name="category_1" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+      <input type="radio" id="star4" name="category_1" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+      <input type="radio" id="star3" name="category_1" value="3" /><label for="star3" title="Meh">3 stars</label>
+      <input type="radio" id="star2" name="category_1" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+      <input type="radio" id="star1" name="category_1" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+  </fieldset>
+
+  <!-- input id was star1 star2, etc... above ...-->
+
+  </div>
+  <div class="row">
+  <button class="btn btn-lg btn-lrp" type="submit" value="Save">Submit</button>
+  </div>
+</form>
+<!-- END THIS IS starrate.css -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{%comment%}
+{% block extrahead %}
+<link href="{{ STATIC_URL }}css/star_ratings.css" rel="stylesheet" type="text/css">
+{% endblock %}
+<!-- THIS IS the star_ratings.css -->
+<p>Please rate2: </p>
+<div class="starRating">
+  <div>
+    <div>
+      <div>
+        <div>
+          <input id="rating1" type="radio" name="rating" value="1">
+          <label for="rating1"><span>1</span></label>
+        </div>
+        <input id="rating2" type="radio" name="rating" value="2">
+        <label for="rating2"><span>2</span></label>
+      </div>
+      <input id="rating3" type="radio" name="rating" value="3">
+      <label for="rating3"><span>3</span></label>
+    </div>
+    <input id="rating4" type="radio" name="rating" value="4">
+    <label for="rating4"><span>4</span></label>
+  </div>
+  <input id="rating5" type="radio" name="rating" value="5">
+  <label for="rating5"><span>5</span></label>
+</div>
+<!-- END THIS IS the star_ratings.css -->
+{%endcomment%}
+
+
+{% comment %}
+<!-- auto generated form and what it looks like when generated-->
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_ul }}
+  <input type="submit" value="{% trans "Save" %}" />
+</form>
+
+<form method="post" action=".">
+  <input type='hidden' name='csrfmiddlewaretoken' value='KjVMZlrR2bqeAjx84Y2Kfh6WYcMNjBuV' />
+  <li><label for="id_content">Content:</label> <textarea cols="40" id="id_content" maxlength="1024" name="content" rows="10">
+  </textarea></li>
+  <li><label for="id_category_1_0">Overall Rating:</label> <ul id="id_category_1">
+    <li><label for="id_category_1_0"><input id="id_category_1_0" name="category_1" type="radio" value="5" /> 5</label></li>
+    <li><label for="id_category_1_1"><input id="id_category_1_1" name="category_1" type="radio" value="4" /> 4</label></li>
+    <li><label for="id_category_1_2"><input id="id_category_1_2" name="category_1" type="radio" value="3" /> 3</label></li>
+    <li><label for="id_category_1_3"><input id="id_category_1_3" name="category_1" type="radio" value="2" /> 2</label></li>
+    <li><label for="id_category_1_4"><input id="id_category_1_4" name="category_1" type="radio" value="1" /> 1</label></li>
+  </ul> <span class="helptext">How would you rate this overall?</span></li>
+  <input type="submit" value="Save" />
+</form>
+{%endcomment%}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load review_tags %}
+
+{% block title %} {{object}} {% endblock title %}
+
+{% block extrahead %}
+<link href="{{ STATIC_URL }}css/starrate.css" rel="stylesheet" type="text/css">
+{% endblock extrahead %}
+
+{% block content %}
+<div class="row" style="background-color:white;">
+  <div class="col-md-8 detailview">
+    <h1>{{ object }}</h1>
+    <ul>
+      <li>{{ object.title }}</li>
+      <li>{{object.brand}}</li>
+      <li>{{object.series}}</li>
+      <li>{{object.slug}}</li>
+      <li>{{object.description}}</li>
+      {% if object.megapixels%}<li>Megapixels - {{object.megapixels|floatformat}}</li>{%endif%}
+
+      {% if object.product_thumb_sm_url and not object.product_thumb_sm_url = "Unavailable" %} <img src="{{object.product_thumb_sm_url}}"> {% endif %}
+      {% if object.product_thumb_lg_url and not object.product_thumb_lg_url = "Unavailable" %} <img src="{{object.product_thumb_lg_url}}"> {% endif %}
+
+    </ul>
+
+    {% if user.is_authenticated %}
+
+      <!-- REVIEW SECTION -->
+        <!--
+          put this in its own template _starrating_form.html or something and include here
+          if user is authenticated. also see if content_type can be object and object_id object.pk
+          because we're on a detailview, should have camera object already as object methinks...
+          else try to get it programatically...
+        -->
+
+      <hr>
+      <!-- THIS IS starrate.css -->
+
+      <form method="post" action="{% url "review_create" content_type='camera' object_id=camera.pk %}">
+        {% csrf_token %}
+        <div class="row">
+          <li>
+            <label for="id_content" style="vertical-align:top; color:white;">Content:</label>
+            <textarea cols="40" id="id_content" maxlength="1024" name="content" rows="10"></textarea>
+          </li>
+
+          <fieldset class="rating">
+            <legend>Overall Rating:</legend>
+            <input type="radio" id="star5" name="category_1" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+            <input type="radio" id="star4" name="category_1" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+            <input type="radio" id="star3" name="category_1" value="3" /><label for="star3" title="Meh">3 stars</label>
+            <input type="radio" id="star2" name="category_1" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+            <input type="radio" id="star1" name="category_1" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+          </fieldset>
+
+          <!-- input id was star1 star2, etc... above ...-->
+
+        </div>
+        <div class="row">
+          <button class="btn btn-lg btn-lrp" type="submit" value="Save">Submit</button>
+        </div>
+      </form>
+      <!-- END THIS IS starrate.css -->
+
+
+      <a href="{% url "review_create" content_type='camera' object_id=camera.pk %}">{% trans "Review this Camera" %}</a>
+    {% else %}
+
+      {% comment %}
+        <a href="#">{% trans "Login to Review this Camera" %}</a>
+      {% endcomment %}
+
+    {% endif %}
+
+    <!-- END REVIEW SECTION -->
+{% comment %}
+    <hr>
+
+    {% get_review_count object as review_count %}
+    {% if review_count > 0 %}
+    {% total_review_average object 5 as stars %}
+    <p>This object got {{ stars }} out of 5 stars.</p>
+    {% else %}
+    {% endif %}
+    <hr>
+    <p>{{ review_count }} users have reviewed this so far.</p>
+    <hr>
+    {% get_reviews object as reviews %}
+    {% for review in reviews %}
+        <p>
+            {{ review.get_average_rating }}
+        </p>
+        <p>
+            {% if review.content %}
+                {{ review.content|truncatewords:'70' }}
+            {% else %}
+                Reviewed without description.
+            {% endif %}
+            <a href="{% url "review_detail" pk=review.id %}">Review details</a>
+    {% endfor %}
+
+{% endcomment %}
+
+    {% if object.lenses.all %}
+        <h3>Lenses for {{ object.title }}</h3>
+        {% for lens in object.lenses.all %}
+            <a href="{{lens.get_absolute_url}}">{{ lens.title }}</a> <br>
+        {% endfor %}
+    {% else %}
+      {% comment %}
+        <p>No lenses for this camera have been populated yet.</p>
+      {% endcomment %}
+    {% endif %}
+  </div>
+  <div class="col-md-4 detailview_col_4">
+    {% include "google_adsense/_lrp_listview_right_column.html" %}
+  </div>
+</div>
+{% endblock %}

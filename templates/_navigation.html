@@ -1,0 +1,70 @@
+<!-- Static navbar -->
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/"><i class="fa fa-camera"></i><span class="nav_header_text"> Lens Reviews</span></a>
+
+    </div>
+
+    <div class="navbar-collapse collapse navbar-right">
+      <div class="nav navbar-nav navbar-right">
+        <form action="/search/" class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input class="nav_search_box form-control" placeholder="{%if query%}{{query|safe}}{%else%}Search{%endif%}" type="search" name="q" value="" autocomplete="off"></input>
+          </div>
+          <button type="submit" class="btn nav_search_button"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+
+{%comment%}
+      <ul class="nav navbar-nav">
+        <li><a href="/cameras/">Cameras</a></li>
+        <li><a href="/lenses/">Lenses</a></li>
+      </ul>
+{%endcomment%}
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="divider"></li>
+            <li class="dropdown-header">Browse Cameras</li>
+
+            <li><a href="/cameras/?/">Cameras</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Browse Lenses</li>
+            <li><a href="/lenses/?/">Lenses</a></li>
+
+          </ul>
+        </li>
+
+        <!--<li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>-->
+      </ul>
+
+
+{% comment %}
+  <!-- commenting this out for now... -->
+
+      <ul class="nav navbar-nav navbar-left">
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+        <li><a href="/account/">Profile</a></li>
+        {% else %}
+        <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+        <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+  <!-- commenting this out for now... -->
+{% endcomment %}
+
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+<!-- end Static navbar-->

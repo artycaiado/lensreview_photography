@@ -1,0 +1,5 @@
+*.pyc
+db.sqlite3
+/media/user_media/*
+local_settings.py
+lensreview_photography/whoosh_index/*

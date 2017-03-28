@@ -1,0 +1,13 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Logged out" %}{% endblock %}
+
+{% block content %}
+
+<div class="col-md-8 col-md-offset-2">
+    <h1>{% trans "Logged Out" %}</h1>
+    <p>{% trans "You have been successfully logged out of the system" %}.</p>
+    <p><a href="/">{% trans "Homepage"%}</a> or <a href="{% url 'django.contrib.auth.views.login' %}">{% trans "Login"%}</a>
+</div>
+{% endblock %}

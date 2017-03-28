@@ -1,0 +1,298 @@
+body{background-color: #222;}
+a{ color: orange; font-weight: bold;}
+p{ color: gray; }
+.btn-lrp {background-color:darkorange;color:white;}
+.btn-lrp:hover {background-color:orange;color:white;}
+
+
+/* heading, paragraph, links, etc. font size changes with screen size. */
+@media (max-width: 768px) {
+  h1{font-size:32px;}
+}
+
+@media (min-width: 769px) {
+  h1{font-size:38px;}
+}
+
+
+/*
+  The header navbar should be mobile style up to 768px wide.
+*/
+
+.navbar-static-top{margin-bottom:5px;}
+
+
+.content_main_row{background-color:black; padding:15px; border:5px solid darkorange; }
+
+@media (max-width: 768px) {
+  .navbar-header { float: none; }
+  .navbar-left,.navbar-right { float: none !important;}
+  .navbar-toggle { display: block;}
+  .navbar-collapse { box-shadow: inset 0 0px 0 rgba(255,255,255,0.1);}
+  .navbar-fixed-top {top: 0; border-width: 0 0 0px; }
+  .navbar-collapse.collapse { display: none!important; }
+  .navbar-nav { float: none!important; margin-top: 7.5px; }
+  .navbar-nav>li { float: none; }
+  .navbar-nav>li>a { padding-top: 10px; padding-bottom: 10px;}
+  .collapse.in{ display:block !important; }
+  .navbar-collapse.in { overflow-y: auto !important; }
+  .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .navbar-nav .open .dropdown-menu>li>a, .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu>li>a { color: #999; }
+  .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #fff;
+    background-color: transparent;
+    background-image:none;
+  }
+}
+
+/*
+  Navbar Search
+*/
+
+.nav_search_box{background-color:lightgray;border-radius:2px;width:150px;}
+.nav_search_button{background-color:darkorange; color:white;}
+.nav_search_button:hover{background-color:orange; color:white;}
+
+/* navbar search button when mobile/tablet, on diff row as box so needs to be same width as it*/
+@media (max-width: 768px) {
+  .nav_search_box{background-color:lightgray;border-radius:2px; width:50%; margin-left:20%; margin-right:20%;}
+  .nav_search_button{background-color:darkorange; color:white; width:50%; margin-left:20%; margin-right:20%;}
+  /* override all default bootstrap stuff, not needed and is making the form not look well as it currently stands. */
+  .navbar-form{padding:0px 0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; border-top:0px; border-bottom:0px;box-shadow:inset 0 0px 0;}
+}
+
+@media (min-width: 769px) {
+  .nav_search_box{margin-left:auto; margin-right:auto;}
+  .nav_search_button{margin-left:auto; margin-right:20px;}
+
+  .navbar-form .form-control{width:275px;}
+}
+/*
+  wide leaderboard google ad at top. 728px wide, so needs to display only with min width like that
+*/
+
+.lrp_leader_container{background-color:black;padding:25px;text-align:center;}
+
+@media (max-width: 768px) {
+  .lrp_leader_wide{ display:none;}
+  .lrp_leader_mobile{ display:block;text-align:center;}
+}
+@media (min-width: 769px) {
+  .lrp_leader_wide{ display:block; }
+  .lrp_leader_mobile{ display:none;}
+}
+
+@media (max-width: 992px){
+  .nav_header_text{display:none;}
+}
+
+/* Homepage Search section...*/
+.lrp_homepage_search_section{
+  width:100%;
+  height:100%;
+  padding-bottom:25px;
+  color:lightgray;
+
+  background-color: black;
+  background-image: linear-gradient(black, gray);
+  background: black;
+  background: linear-gradient(black, darkgray);
+
+  padding-top:25px; /* other 25 is at bottom of adsense div class*/
+  padding-bottom:50px;
+
+}
+
+/* Large Search Bar from search page. */
+.lrp_homepage_search_form{ margin-top:25px; padding:10px;}
+.main-search-button { background-color: darkorange; color:white;}
+.main-search-button:hover { background-color: orange; color:white;}
+
+@media (max-width: 768px) {
+  .main-search-group{width:100%;}
+  .main-search{background-color:lightgray; color: black; height:55px; font-size:150%;border: 3px solid orange;}
+  .main-search-button{height:55px;font-size:150%; width:100%; margin-top:5px;}
+
+  .main-search::selection {
+    background: #ffb7b7; /* WebKit/Blink Browsers */
+  }
+  .main-search::-moz-selection {
+    background: #ffb7b7; /* Gecko Browsers */
+  }
+}
+
+@media (min-width: 769px) {
+  .main-search-group{width:85%;}
+  .main-search{background-color:lightgray; color: black; height:75px; font-size:250%;border: 3px solid orange;}
+  .main-search-button{height:75px;font-size:250%; width:14%;}
+
+  .main-search::selection {
+    background: orange; /* WebKit/Blink Browsers */
+  }
+  .main-search::-moz-selection {
+    background: orange; /* Gecko Browsers */
+  }
+}
+
+.search_col_10{
+  background-color:black;
+  border: solid 5px darkorange;
+  padding:25px;
+}
+
+/* Autocomplete */
+.ac-results{background-color:#3d3b3b; padding-left:15px; font-size: 140%; font-family:sans-serif;}
+.ac-results a:link {color:#5cb85c;}
+.ac-results a:hover {color:orange;}
+
+/* Search results */
+.search_results{ border: solid 5px orange;}
+
+.search_results_table_head{background-color: orange; color:black; font-size: 24px;}
+
+.table-striped>tbody>tr:nth-child(even)>td, .table-striped>tbody>tr:nth-child(even)>th{
+  background-color:white; border-top: 1px solid black; border-bottom: 1px solid black;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th{
+  background-color:white; border-top: 1px solid black;  border-bottom: 1px solid black;
+}
+.search_result_image{height:40px;}
+
+dt { background-color:orange; color: black;font-size:125%; text-align:center;padding-top: 7%;padding-bottom: 7%;}
+dd { background-color:white; color: black; text-align:center;padding-top: 2%;padding-bottom: 2%;}
+
+/*
+  DJANGO Class Based Views - ListView and DetailView
+*/
+
+/* Django CBV Paginated ListViews */
+
+.listview{ padding:15px; background-color:white;}
+
+.listview_right_column{/*background-color:darkgray;*/
+  vertical-align:middle; padding:5px;
+  background-color: white;
+
+  /* will be "on top", if browser supports it */
+/*
+  background-image: linear-gradient(black, gray);
+*/
+  /* these will reset other properties, like background-position, but it does know what you mean */
+/*
+  background: black;
+  background: linear-gradient(black, darkgray);
+*/
+}
+
+/* Dont display col-md-8 banner in listviews if screen is less than 540px; */
+@media (max-width:540px){
+  .google_ads_md_8_banner{display:none;}
+}
+
+/* Django CBV DetailView */
+
+.detailview{ padding:15px; background-color:white;}
+
+.detailview_col_4{
+  padding:5px;
+  vertical-align:middle;
+  text-align:center;
+  background-color: white;
+
+  /* will be "on top", if browser supports it */
+/*
+  background-image: linear-gradient(black, gray);
+*/
+  /* these will reset other properties, like background-position, but it does know what you mean */
+/*
+  background: black;
+  background: linear-gradient(black, darkgray);
+*/
+}
+
+/* not allowed to remove display of google ads */
+/*
+@media (max-width: 991px) {
+  .listview_right_column{display:none;}
+  .detailview_col_4{display:none;}
+}
+
+*/
+
+/* ----- END DJANGO Class Based Views - ListView and DetailView ----- */
+
+
+/*
+  pagination
+*/
+
+
+/* Account form styling, signup, signin, etc. */
+
+.panel-info>.panel-heading {
+  background-color:orange;
+  color:white;
+  font-size: 150%;
+
+  background-image:linear-gradient(to bottom,orange 0,darkorange 100%);
+  border:darkorange;
+}
+
+.panel-body{
+  padding: 15px;
+  background-color:black;
+  color:orange;
+  text-align:right;
+  font-size:12px;
+  font-weight:normal;
+}
+
+
+.registration_form_subtext{color:white;}
+
+/* override default bootstrap pagination margin of 20 */
+.pagination{margin:0px;}
+
+/* active page */
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover,
+.pagination>.active>span:hover, .pagination>.active>a:focus,
+.pagination>.active>span:focus{
+  background-color:darkorange;
+  border:solid 1px black;
+  /*border-radius:7px;*/
+  font-weight: bold;
+  font-size:120%;
+}
+
+/* non active page thats a link */
+.pagination>li>a, .pagination>li>span {
+  color:darkorange;
+  background-color:black;
+  border-color:orange;
+}
+.pagination>li>a:hover {
+  color:darkorange;
+  background-color:white;
+
+  /* figure out a way to get all boxes a fixed-width, then make font bigger on hover but not when it moves screen. */
+  /*font-size:120%;*/
+}
+
+
+/* footer */
+.footer{background-color:black; padding:25px;
+  /*border-top: solid 5px orange;*/
+}

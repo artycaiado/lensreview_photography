@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <div class="col-md-8 listview">
+        <h1><i class="fa fa-camera"></i> Cameras</h1>
+
+
+        {%comment%}
+          <form method="get" action="./">
+            <table>
+              {{ form.as_table }}
+              <tr>
+                <td>&nbsp;</td>
+                <td>
+                  <input type="submit" value="Search">
+                </td>
+              </tr>
+            </table>
+          </form>
+        {%endcomment%}
+
+
+        <ul>
+        {% for camera in object_list %}
+
+            <li><a href ="/cameras/{{camera.slug}}/">{{ camera.title }}</a></li>
+
+        {% empty %}
+            <li>No Cameras yet folks!</li>
+        {% endfor %}
+        </ul>
+        <div class="google_ads_md_8_banner">
+          {% include "google_adsense/_lrp_col_md_8_banner.html" %}
+        </div>
+        {% include "_pagination.html" %}
+      </div>
+
+      <div class="col-md-4 listview_right_column text-center">
+        {% include "google_adsense/_lrp_listview_right_column.html" %}
+      </div>
+
+{% endblock %}

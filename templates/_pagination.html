@@ -1,0 +1,54 @@
+{% if is_paginated %}
+{% load i18n %}
+  <div class="row text-center"  style="margin:0px; padding:0px;">
+    <ul class="pagination pagination-centered text-center">
+      {% if page_obj.has_previous %}
+      <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev"><i class="fa fa-arrow-left"> </i> {% trans "Previous" %}</a></li>
+      {% else %}
+      <li><span class="disabled prev"><i class="fa fa-arrow-left"></i> {% trans "Previous" %}</span></li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">{% trans "Next" %} <i class="fa fa-arrow-right"></i></a></li>
+      {% else %}
+      <li><span class="disabled next">{% trans "Next" %} <i class="fa fa-arrow-right"></i></span></li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="row text-center" style="margin:0px; padding:0px;">
+
+    <ul class="pagination pagination-centered text-center">
+        {% for page in page_obj.pages %}
+        {% if page %}
+        {% ifequal page page_obj.number %}
+        <li class="active"><span class="current page">{{ page }}</span></li>
+        {% else %}
+        <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+        {% endifequal %}
+        {% else %}
+        <li><span class="disabled">...</span></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+
+
+{% comment %}
+<!-- this one doesnt require the pip module but displays all hundreds of pages... ref for style-->
+<ul class="pagination pagination-centered">
+    {% if page_obj.has_previous %}
+    <li><a href="?page=1">&laquo;</a></li>
+    <li><a href="?page={{ page_obj.previous_page_number }}">&lsaquo;<i class="fa fa-arrow-left"> Previous</i></a></li>
+    {% endif %}
+
+    {% for i in paginator.page_range %}
+    <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}">&rsaquo;Next <i class="fa fa-arrow-right"></i></a></li>
+    <li><a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
+    {% endif %}
+</ul>
+{% endcomment %}
