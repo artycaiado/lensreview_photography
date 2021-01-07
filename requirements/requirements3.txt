@@ -17,7 +17,7 @@ easy-thumbnails==2.2
 factory-boy==2.4.1
 future==0.14.2
 html5lib==0.999
-lxml==3.4.0
+lxml==4.6.2
 oauthlib==0.7.2
 requests==2.4.3
 requests-oauthlib==0.4.2
